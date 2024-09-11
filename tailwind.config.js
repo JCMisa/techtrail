@@ -52,7 +52,7 @@ module.exports = {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'
 				},
-				border: '#1D242B',
+				border: '#111212',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				chart: {

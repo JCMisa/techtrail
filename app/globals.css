@@ -103,7 +103,7 @@ body {
 }
 
 .logo-text {
-  background: -webkit-linear-gradient(90deg, #0ec4e8, #9e30a9);
+  background: -webkit-linear-gradient(16deg, #0ec4e8, #9e30a9);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
