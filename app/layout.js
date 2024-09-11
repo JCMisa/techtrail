@@ -1,5 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -19,15 +21,32 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" type="image/svg+xml" href="/techtrail-logo.png" />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+        layout: {
+          logoImageUrl: '/techtrail-logo.png',
+          socialButtonsVariant: 'iconButton'
+        },
+        variables: {
+          colorText: '#FAFAFA',
+          colorPrimary: '#0ec4e8',
+          colorBackground: '#18191a',
+          colorInputBackground: '#111212',
+          colorInputText: '#FAFAFA'
+        }
+      }}
+    >
+      <html lang="en">
+        <head>
+          <link rel="icon" type="image/svg+xml" href="/techtrail-logo.png" />
+        </head>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
