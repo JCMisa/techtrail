@@ -1,11 +1,11 @@
 import React from 'react'
-import Header from '../_components/Header'
+import CreateCourseHeader from './_components/CreateCourseHeader'
 
 const CreateCourseLayout = ({ children }) => {
 
     return (
         <div>
-            <Header />
+            <CreateCourseHeader />
             {children}
         </div>
     )

@@ -13,7 +13,7 @@ import {
 const CourseList = () => {
 
     return (
-        <Carousel className="w-full max-w-sm">
+        <Carousel className="w-full max-w-sm relative">
             <CarouselContent className="-ml-1">
                 {courses.map((course, index) => (
                     <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/3">
@@ -23,8 +23,10 @@ const CourseList = () => {
                     </CarouselItem>
                 ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <div className='absolute bottom-0 left-14'>
+                <CarouselPrevious />
+                <CarouselNext />
+            </div>
         </Carousel>
     )
 }
