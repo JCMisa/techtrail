@@ -7,11 +7,14 @@ import { UserInputContext } from '../_context/UserInputContext'
 import CourseTopic from './_components/CourseTopic'
 import CourseOptions from './_components/CourseOptions'
 import { Button } from '@/components/ui/button'
-import { Brain, LoaderCircle } from 'lucide-react'
+import { ArrowLeftCircle, Brain, LoaderCircle } from 'lucide-react'
 import { toast } from 'sonner'
 import { chatSession } from '@/utils/AiModel'
+import { useRouter } from 'next/navigation'
 
 const CreateCoursePage = () => {
+
+    const router = useRouter();
 
     const [loading, setLoading] = useState(false);
     const { userCourseInput, setUserCourseInput } = useContext(UserInputContext);
@@ -39,23 +42,26 @@ const CreateCoursePage = () => {
     }
 
     return (
-        <div className='p-5 mb-20'>
-            <div id='course-select'>
-                <h2 className='text-center text-3xl my-5'>Select Your Tech Course</h2>
+        <div className='p-5 mb-20 relative'>
+            <div id='course-select' className='z-20'>
+                <div className='flex items-center justify-center gap-2'>
+                    <ArrowLeftCircle className='cursor-pointer' onClick={() => router.replace('/dashboard')} />
+                    <h2 className='text-center text-3xl my-5'>Select Your Tech Course</h2>
+                </div>
                 <div className='flex justify-center items-center'>
                     <CourseList />
                 </div>
             </div>
             {
                 userCourseInput?.courseName != null && (
-                    <div id='course-topic' className='mt-60'>
+                    <div id='course-topic' className='mt-60 z-20'>
                         <CourseTopic />
                     </div>
                 )
             }
             {
                 userCourseInput?.topic != null && (
-                    <div id='course-level' className='mt-60'>
+                    <div id='course-level' className='mt-60 z-20'>
                         <h2 className='text-center text-3xl my-5'>Select Course Options</h2>
                         <CourseOptions />
                     </div>
@@ -63,12 +69,26 @@ const CreateCoursePage = () => {
             }
             {
                 (userCourseInput?.level != null && userCourseInput?.duration != null && userCourseInput?.chapters != null) && (
-                    <div className='px-10 md:px-20 lg:px-44 mt-5 float-end'>
-                        <Button className='min-w-40 max-w-40 flex flex-row items-center gap-2' onClick={() => generateAiCourse()}>
-                            {
-                                loading ? <LoaderCircle className='animate-spin' /> : <>Generate Course <Brain /></>
-                            }
-                        </Button>
+                    <div>
+                        <div className='px-10 md:px-20 lg:px-44 mt-5 float-end z-20'>
+                            <Button className='min-w-40 max-w-40 flex flex-row items-center gap-2' onClick={() => generateAiCourse()}>
+                                {
+                                    loading ? <LoaderCircle className='animate-spin' /> : <>Generate Course <Brain /></>
+                                }
+                            </Button>
+                        </div>
+                        {/* floating designs */}
+                        <div>
+                            <div className='floating-1 absolute top-20 right-10 min-w-80 min-h-80 z-[-10] opacity-75 hidden sm:block'></div>
+                            <div className='floating-2 absolute top-80 left-10 min-w-40 min-h-40 z-[-10] opacity-75 hidden sm:block animate-pulse'></div>
+                            <div className='floating-3 absolute top-96 right-10 min-w-10 min-h-10 z-[-10] opacity-75 hidden sm:block'></div>
+
+                            <div className='floating-5 absolute top-[35rem] right-80 min-w-10 min-h-10 z-[-10] opacity-75 hidden sm:block animate-bounce'></div>
+
+                            <div className='floating-4 absolute bottom-0 left-10 min-w-80 min-h-80 z-[-10] opacity-75 hidden sm:block animate-pulse'></div>
+                            <div className='floating-1 absolute bottom-60 right-32 min-w-40 min-h-40 z-[-10] opacity-75 hidden sm:block'></div>
+                            <div className='floating-2 absolute bottom-0 right-10 min-w-10 min-h-10 z-[-10] opacity-75 hidden sm:block animate-bounce'></div>
+                        </div>
                     </div>
                 )
             }

@@ -10,7 +10,7 @@ const CourseCard = ({ course }) => {
     const { userCourseInput, setUserCourseInput } = useContext(UserInputContext);
 
     return (
-        <div className={`bg-dark-100 w-full min-h-56 max-h-56 rounded-md shadow-md border cursor-pointer ${userCourseInput?.courseName == course.name && 'border-secondary border-2 rounded-xl'}`} onClick={() => router.push('#course-topic')}>
+        <div className={`bg-dark-100 w-full min-h-56 max-h-56 rounded-md shadow-md border cursor-pointer ${userCourseInput?.courseName == course.name ? 'scale-105' : 'opacity-50'}`} onClick={() => router.push('#course-topic')}>
             <div className='flex flex-col gap-3'>
                 <div className='rounded-lg w-full h-20 linear-bg relative'>
                     {/* <Image src={course.img} alt='image' width={100} height={100} className='w-full h-32 bg-contain p-2 rounded-lg' /> */}
