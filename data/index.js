@@ -1,33 +1,35 @@
+import { BetweenHorizonalStart, Brain, CodeXml, Cpu, Database, FileImage, GlobeLock, Laptop, Network, ShieldCheck, SquareCode, TrendingUpDown, Wifi } from "lucide-react";
+
 export const courses = [
     {
         id: 1,
         name: "Programming",
         description: "Covers basic programming concepts, syntax, and algorithms.",
-        img: '/programming.jpg'
+        icon: <CodeXml />
     },
     {
         id: 2,
         name: "Object-Oriented Programming",
         description: "Delves into OOP principles, including inheritance, polymorphism, and encapsulation.",
-        img: '/oop.jpg'
+        icon: <SquareCode />
     },
     {
         id: 3,
         name: "Networking",
         description: "Introduces network concepts, protocols, and devices.",
-        img: '/networking.jpg'
+        icon: <Network />
     },
     {
         id: 4,
         name: "Network Security",
         description: "Covers security threats, vulnerabilities, and countermeasures in network environments.",
-        img: '/network-security.jpg'
+        icon: <GlobeLock />
     },
     {
         id: 5,
         name: "Artificial Intelligence",
         description: "Explores the basics of AI, including machine learning and neural networks.",
-        img: '/ai.jfif'
+        icon: <Brain />
     },
 ];
 
@@ -36,78 +38,78 @@ export const premiumCourses = [
         id: 1,
         name: "Programming",
         description: "Covers basic programming concepts, syntax, and algorithms.",
-        img: '/programming.jpg'
+        icon: <CodeXml />
     },
     {
         id: 2,
         name: "Object-Oriented Programming",
         description: "Delves into OOP principles, including inheritance, polymorphism, and encapsulation.",
-        img: '/oop.jpg'
+        icon: <SquareCode />
     },
     {
         id: 3,
         name: "Networking",
         description: "Introduces network concepts, protocols, and devices.",
-        img: '/networking.jpg'
+        icon: <Network />
     },
     {
         id: 4,
         name: "Network Security",
         description: "Covers security threats, vulnerabilities, and countermeasures in network environments.",
-        img: '/network-security.jpg'
+        icon: <GlobeLock />
     },
     {
         id: 5,
         name: "Artificial Intelligence",
         description: "Explores the basics of AI, including machine learning and neural networks.",
-        img: '/ai.jfif'
+        icon: <Brain />
     },
     {
         id: 6,
         name: "Natural Language Processing",
         description: "Focuses on the interaction between computers and human language.",
-        img: '/nlp.jpg'
+        icon: <Cpu />
     },
     {
         id: 7,
         name: "Web Development",
         description: "Teaches the creation of websites using HTML, CSS, JavaScript, and frameworks.",
-        img: '/web.jpg'
+        icon: <Laptop />
     },
     {
         id: 8,
         name: "Database Management",
         description: "Covers database concepts, SQL, and database design.",
-        img: '/database.jpg'
+        icon: <Database />
     },
     {
         id: 9,
         name: "Cybersecurity",
         description: "Explores cybersecurity principles, threats, and best practices.",
-        img: '/cybersecurity.jpg'
+        icon: <ShieldCheck />
     },
     {
         id: 10,
         name: "Internet of Things (IoT)",
         description: "Introduces the concept of IoT, its components, and applications.",
-        img: '/iot.avif'
+        icon: <Wifi />
     },
     {
         id: 11,
         name: "Data Analytics",
         description: "Teaches techniques for collecting, cleaning, and analyzing data to extract meaningful insights.",
-        img: '/data-analytics.jpg'
+        icon: <TrendingUpDown />
     },
     {
         id: 12,
         name: "Data Visualization",
         description: "Focuses on creating visual representations of data to communicate findings effectively.",
-        img: '/data-vis.avif'
+        icon: <BetweenHorizonalStart />
     },
     {
         id: 13,
         name: "Graphics and Animation",
         description: "Covers principles of 2D and 3D graphics, animation techniques, and software tools like Adobe Photoshop and Blender.",
-        img: '/animation.webp'
+        icon: <FileImage />
     },
 ];

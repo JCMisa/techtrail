@@ -1,12 +1,21 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import CreateCourseHeader from './_components/CreateCourseHeader'
+import { UserInputContext } from '../_context/UserInputContext';
 
 const CreateCourseLayout = ({ children }) => {
 
+    const [userCourseInput, setUserCourseInput] = useState([]);
+
     return (
         <div>
-            <CreateCourseHeader />
-            {children}
+            <UserInputContext.Provider value={{ userCourseInput, setUserCourseInput }}>
+                <>
+                    <CreateCourseHeader />
+                    {children}
+                </>
+            </UserInputContext.Provider>
         </div>
     )
 }
