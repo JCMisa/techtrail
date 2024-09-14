@@ -14,6 +14,7 @@ export const Course = pgTable("course", {
     level: varchar("level"),
     courseOutput: json("courseOutput"),
     createdBy: varchar("createdBy"),
+    createdAt: varchar("createdAt"),
     username: varchar("username"),
     userProfileImage: varchar("userProfileImage"),
     courseBanner: varchar('courseBanner')

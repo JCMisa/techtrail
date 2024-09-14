@@ -11,9 +11,16 @@ import { ArrowLeftCircle, Brain, LoaderCircle } from 'lucide-react'
 import { toast } from 'sonner'
 import { chatSession } from '@/utils/AiModel'
 import { useRouter } from 'next/navigation'
+import FloatingDesigns from './_components/FloatingDesigns'
+import { db } from '@/utils/db'
+import { Course } from '@/utils/schema'
+import uuid4 from 'uuid4'
+import { useUser } from '@clerk/nextjs'
+import moment from 'moment'
 
 const CreateCoursePage = () => {
 
+    const { user } = useUser();
     const router = useRouter();
 
     const [loading, setLoading] = useState(false);
@@ -26,19 +33,51 @@ const CreateCoursePage = () => {
     const generateAiCourse = async () => {
         // const PROMPT = `Generate a course tutorial on the following details, courseCategory with value of ${userCourseInput?.courseName}, topic with value of ${userCourseInput?.topic}, level with value of ${userCourseInput?.level}, duration with value of ${userCourseInput?.duration}, and chapters which is ${userCourseInput?.chapters}, based on those properties I want additional property called course which has an object value with properties called name which is the name of the course, description which is the description of the course, chapters which is an array of objects and each object has properties called chapterName which is the name of the chapter, about which is what the chapter is all about, duration which is the duration of the chapter, and questions which is an array of five objects where each object has properties as question which is the question related to the current chapter, options which is an array of 3 elements about the possible answers in string format, and answer which is the actual answer for the question, make it in JSON format.`
 
-        const PROMPT = `Generate a course tutorial on the following details, courseCategory with value of ${userCourseInput?.courseName}, topic with value of ${userCourseInput?.topic}, level with value of ${userCourseInput?.level}, duration with value of ${userCourseInput?.duration}, and chapters which is ${userCourseInput?.chapters}, based on those properties I want additional property called course which has an object value with properties called name which is the name of the course, description which is the description of the course, chapters which is an array of objects and each object has properties called chapterName which is the name of the chapter, about which is what the chapter is all about, duration which is the duration of the chapter, questions which is an array of five objects where each object has properties as question which is the question related to the current chapter, options which is an array of three options about the possible answers in string format, and answer which is the actual answer for the question, and content which is an array of objects with properties as title which is the title of the chapter, explanation which is a complete explanation about the specific chapter's title, codeExample in <precode> format if applicable, and courseVideo which is initially an empty string, make it in JSON format.`
+        const PROMPT = `Generate a course tutorial on the following details, courseCategory with value of ${userCourseInput?.courseName}, topic with value of ${userCourseInput?.topic}, level with value of ${userCourseInput?.level}, duration with value of ${userCourseInput?.duration}, and chapters which is ${userCourseInput?.chapters}, based on those properties I want additional property called course which has an object value with properties called name which is the name of the course, description which is the description of the course, chapters which is an array of objects and each object has properties called chapterName which is the name of the chapter, about which is what the chapter is all about, duration which is the duration of the chapter, questions which is an array of five objects where each object has properties as question which is the question related to the current chapter, options which is an array of three options about the possible answers in string format, and answer which is the actual answer for the question, and content which is an array of objects with properties as title which is the title of the chapter, explanation which is a complete explanation about the specific chapter's title, codeExample in <precode> format if applicable, and courseVideo which initially has an empty string or a null value, make it in JSON format.`
 
         setLoading(true);
         try {
             const aiResponse = await chatSession.sendMessage(PROMPT);
             if (aiResponse) {
-                console.log('aiResponse: ', JSON.parse(aiResponse.response.text()));
+                saveToDb(JSON.parse(aiResponse.response.text()));
             }
         } catch (error) {
             toast(
                 <p className='font-bold text-sm text-red-500'>Internal error occured while generating course</p>
             )
             console.log('ai generation error: ', error)
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    const saveToDb = async (aiOutput) => {
+        setLoading(true);
+        try {
+            const courseId = uuid4();
+            const result = await db.insert(Course).values({
+                courseId: courseId,
+                courseName: userCourseInput?.courseName,
+                courseTitle: userCourseInput?.topic,
+                level: userCourseInput?.level,
+                courseOutput: aiOutput,
+                createdBy: user?.primaryEmailAddress?.emailAddress,
+                createdAt: moment().format('MM-DD-yyyy'),
+                username: user?.fullName,
+                userProfileImage: user?.imageUrl,
+                courseBanner: 'https://i.sstatic.net/y9DpT.jpg'
+            })
+            if (result) {
+                toast(
+                    <p className='font-bold text-sm text-green-500'>Course created successfully</p>
+                )
+                router.replace(`/create-course/${courseId}`);
+            }
+        } catch (error) {
+            toast(
+                <p className='font-bold text-sm text-red-500'>Internal error occured while saving course</p>
+            )
+            console.log('saving course error: ', error)
         } finally {
             setLoading(false);
         }
@@ -81,17 +120,7 @@ const CreateCoursePage = () => {
                             </Button>
                         </div>
                         {/* floating designs */}
-                        <div>
-                            <div className='floating-1 absolute top-20 right-10 min-w-80 min-h-80 z-[-10] opacity-75 hidden sm:block'></div>
-                            <div className='floating-2 absolute top-80 left-10 min-w-40 min-h-40 z-[-10] opacity-75 hidden sm:block animate-pulse'></div>
-                            <div className='floating-3 absolute top-96 right-10 min-w-10 min-h-10 z-[-10] opacity-75 hidden sm:block'></div>
-
-                            <div className='floating-5 absolute top-[35rem] right-80 min-w-10 min-h-10 z-[-10] opacity-75 hidden sm:block animate-bounce'></div>
-
-                            <div className='floating-4 absolute bottom-0 left-10 min-w-80 min-h-80 z-[-10] opacity-75 hidden sm:block animate-pulse'></div>
-                            <div className='floating-1 absolute bottom-60 right-32 min-w-40 min-h-40 z-[-10] opacity-75 hidden sm:block'></div>
-                            <div className='floating-2 absolute bottom-0 right-10 min-w-10 min-h-10 z-[-10] opacity-75 hidden sm:block animate-bounce'></div>
-                        </div>
+                        <FloatingDesigns />
                     </div>
                 )
             }
