@@ -4,13 +4,16 @@ import { db } from '@/utils/db';
 import { Course } from '@/utils/schema';
 import { useUser } from '@clerk/nextjs'
 import { and, eq } from 'drizzle-orm';
-import { ArrowLeftCircle } from 'lucide-react';
+import { ArrowLeftCircle, LoaderCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
 import CourseBasicInfo from './_components/CourseBasicInfo';
 import LoadingDialog from '@/app/_components/LoadingDialog';
 import CourseChapterList from './_components/CourseChapterList';
+import CourseDetails from './_components/CourseDetails';
+import { Button } from '@/components/ui/button';
+import service from '@/utils/service';
 
 const CourseLayout = ({ params }) => {
     const { user } = useUser();
@@ -46,6 +49,38 @@ const CourseLayout = ({ params }) => {
         }
     }
 
+    const generateChapterContent = async () => {
+        const chapters = course?.courseOutput?.course?.chapters;
+        chapters.forEach(async (chapter, index) => {
+            setLoading(true);
+            try {
+                // generate video url
+                let videoId = '';
+                service.getVideos(course?.courseTitle + ':' + chapter?.chapterName).then(resp => {
+                    videoId = resp[0]?.id?.videoId;
+                    saveVideoId(videoId);
+                })
+
+                const saveVideoId = async (videoId) => {
+                    course.courseOutput.course.chapters[index].chapterVideo = videoId;
+                    const result = await db.update(Course).set({
+                        courseOutput: course?.courseOutput
+                    })
+                    if (result) {
+                        console.log("result successfully updated: ", result);
+                    }
+                }
+            } catch (error) {
+                toast(
+                    <p className='text-sm text-red-500 font-bold'>Internal error occured while creating AI Course Content</p>
+                )
+                console.log('video generation error: ', error);
+            } finally {
+                setLoading(false);
+            }
+        })
+    }
+
     return (
         <div className='p-5'>
             <div className='flex flex-row items-center justify-center gap-2 my-5'>
@@ -62,12 +97,25 @@ const CourseLayout = ({ params }) => {
                 <div className='flex flex-col md:flex-row gap-3'>
                     {/* chapter list */}
                     <div>
-                        <CourseChapterList course={course} refreshData={() => getCourseByCourseId()} />
+                        <CourseDetails course={course} />
                     </div>
                     {/* more details */}
-                    <div></div>
+                    <div>
+                        <CourseChapterList course={course} refreshData={() => getCourseByCourseId()} />
+                    </div>
                 </div>
             </div>
+
+            {/* submit button */}
+            <Button onClick={generateChapterContent} className='my-5 float-end'>
+                {
+                    loading ? (
+                        <LoaderCircle className={'animate-spin'} />
+                    ) : (
+                        'Generate Course'
+                    )
+                }
+            </Button>
             <LoadingDialog loading={loading} />
         </div>
     )
