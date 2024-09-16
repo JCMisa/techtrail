@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
 import CourseBasicInfo from './_components/CourseBasicInfo';
 import LoadingDialog from '@/app/_components/LoadingDialog';
+import CourseChapterList from './_components/CourseChapterList';
 
 const CourseLayout = ({ params }) => {
     const { user } = useUser();
@@ -52,15 +53,17 @@ const CourseLayout = ({ params }) => {
                 <h2 className='text-center text-3xl font-bold'>Review Your Course</h2>
             </div>
 
-            <div className='flex flex-col gap-3 bg-dark-100'>
+            <div className='flex flex-col gap-3'>
                 {/* basic info */}
-                <div>
-                    <CourseBasicInfo course={course} />
+                <div className='bg-dark-100 rounded-lg'>
+                    <CourseBasicInfo course={course} refreshData={() => getCourseByCourseId()} />
                 </div>
 
                 <div className='flex flex-col md:flex-row gap-3'>
                     {/* chapter list */}
-                    <div></div>
+                    <div>
+                        <CourseChapterList course={course} refreshData={() => getCourseByCourseId()} />
+                    </div>
                     {/* more details */}
                     <div></div>
                 </div>
