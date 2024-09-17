@@ -762,3 +762,138 @@ body {
   border-radius: 27% 73% 29% 71% / 76% 25% 75% 24%;
   background: -webkit-linear-gradient(16deg, #0ec4e8, #9e30a9);
 }
+
+/* course card */
+.card-c {
+  border-radius: 20px;
+  background: #18191a;
+  padding: 5px;
+  overflow: hidden;
+  box-shadow: rgba(45, 45, 48, 0.2) 0px 7px 20px 0px;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-c:hover {
+  transform: scale(1.05);
+}
+
+.card-c .top-section-c {
+  height: 150px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(45deg, #0ec4e8 0%, #9e30a9 100%);
+  position: relative;
+}
+
+.card-c .top-section-c .border-c {
+  border-bottom-right-radius: 10px;
+  height: 30px;
+  width: 130px;
+  background: white;
+  background: #18191a;
+  position: relative;
+  transform: skew(-40deg);
+  box-shadow: -10px -10px 0 0 #18191a;
+}
+
+.card-c .top-section-c .border-c::before {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 0;
+  right: -15px;
+  background: rgba(255, 255, 255, 0);
+  border-top-left-radius: 10px;
+  box-shadow: -5px -5px 0 2px #18191a;
+}
+
+.card-c .top-section-c::before {
+  content: "";
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: rgba(255, 255, 255, 0);
+  height: 15px;
+  width: 15px;
+  border-top-left-radius: 15px;
+  box-shadow: -5px -5px 0 2px #18191a;
+}
+
+.card-c .top-section-c .icons-c {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-c .top-section-c .icons-c .logo-c {
+  height: 100%;
+  aspect-ratio: 1;
+  padding: 7px 0 7px 15px;
+}
+
+.card-c .top-section-c .icons-c .logo-c .top-section-c {
+  height: 100%;
+}
+
+.card-c .top-section-c .icons-c .social-media-c {
+  height: 100%;
+  padding: 2px 7px;
+  display: flex;
+  gap: 7px;
+}
+
+.card-c .top-section-c .icons-c .social-media-c .svg-c {
+  height: 100%;
+  fill: #18191a;
+}
+
+.card-c .top-section-c .icons-c .social-media-c .svg-c:hover {
+  fill: white;
+}
+
+.card-c .bottom-section-c {
+  margin-top: 15px;
+  padding: 10px 5px;
+}
+
+.card-c .bottom-section-c .title-c {
+  display: block;
+  font-size: 12px;
+  font-weight: bolder;
+  color: white;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.card-c .bottom-section-c .row-c {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.card-c .bottom-section-c .row-c .item-c {
+  flex: 30%;
+  text-align: center;
+  padding: 5px;
+  color: #0ec4e8;
+}
+
+.card-c .bottom-section-c .row-c .item-c .big-text-c {
+  font-size: 12px;
+  display: block;
+}
+
+.card-c .bottom-section-c .row-c .item-c .regular-text-c {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.27);
+}
+
+.card-c .bottom-section-c .row-c .item-c:nth-child(2) {
+  border-left: 1px solid rgba(255, 255, 255, 0.126);
+  border-right: 1px solid rgba(255, 255, 255, 0.126);
+}

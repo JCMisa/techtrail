@@ -65,9 +65,15 @@ const CourseLayout = ({ params }) => {
                     course.courseOutput.course.chapters[index].chapterVideo = videoId;
                     const result = await db.update(Course).set({
                         courseOutput: course?.courseOutput
-                    })
+                    }).where(and(
+                        eq(Course?.id, course?.id),
+                        eq(Course?.createdBy, course?.createdBy)
+                    ))
                     if (result) {
-                        console.log("result successfully updated: ", result);
+                        toast(
+                            <p className='text-sm text-green-500 font-bold'>Congratulations🎉 Your course is ready</p>
+                        )
+                        router.replace('/dashboard');
                     }
                 }
             } catch (error) {

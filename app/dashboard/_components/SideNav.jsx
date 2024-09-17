@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { LayoutGrid, Settings, Telescope, WalletCards } from "lucide-react";
+import { BookOpen, LayoutGrid, Settings, Telescope, WalletCards } from "lucide-react";
 
 const SideNav = ({ isShow }) => {
 
@@ -15,18 +15,24 @@ const SideNav = ({ isShow }) => {
         },
         {
             id: 2,
+            name: "Courses",
+            icon: <BookOpen />,
+            path: "/dashboard/courses",
+        },
+        {
+            id: 3,
             name: "Explore",
             icon: <Telescope />,
             path: "/dashboard/explore",
         },
         {
-            id: 3,
+            id: 4,
             name: "Upgrade",
             icon: <WalletCards />,
             path: "/dashboard/upgrade",
         },
         {
-            id: 4,
+            id: 5,
             name: "Settings",
             icon: <Settings />,
             path: "/dashboard/setting",
