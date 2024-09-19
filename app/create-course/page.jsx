@@ -65,7 +65,7 @@ const CreateCoursePage = () => {
                 createdAt: moment().format('MM-DD-yyyy'),
                 username: user?.fullName,
                 userProfileImage: user?.imageUrl,
-                courseBanner: 'https://i.sstatic.net/y9DpT.jpg'
+                courseBanner: 'https://linda-hoang.com/wp-content/uploads/2014/10/img-placeholder-dark.jpg'
             })
             if (result) {
                 toast(

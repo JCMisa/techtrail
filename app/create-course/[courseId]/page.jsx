@@ -106,7 +106,7 @@ const CourseLayout = ({ params }) => {
                         <CourseDetails course={course} />
                     </div>
                     {/* more details */}
-                    <div>
+                    <div className='w-full'>
                         <CourseChapterList course={course} refreshData={() => getCourseByCourseId()} />
                     </div>
                 </div>

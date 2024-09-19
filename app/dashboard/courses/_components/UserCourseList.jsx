@@ -47,7 +47,7 @@ const UserCourseList = () => {
             {
               courseList && courseList?.map((course, index) => (
                 <div key={course?.id || index}>
-                  <UserCourseCard course={course} />
+                  <UserCourseCard course={course} refreshData={() => getUserCourses()} />
                 </div>
               ))
             }
