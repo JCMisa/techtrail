@@ -7,7 +7,7 @@ import { Dot, EllipsisVertical } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import Reac, { useState } from 'react'
+import React, { useState } from 'react'
 import { toast } from 'sonner'
 import DropdownOption from './DropdownOption'
 
@@ -79,9 +79,9 @@ const UserCourseCard = ({ course, refreshData, displayUser = false }) => {
             </Link>
             <div className="p-5">
                 <Link href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">Noteworthy technology acquisitions 2021</h5>
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">{course?.courseOutput?.course?.name?.slice(0, 30)}...</h5>
                 </Link>
-                <p className="mb-3 font-normal text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                <p className="mb-3 font-normal text-gray-400">{course?.courseOutput?.course?.description?.slice(0, 50)}....</p>
                 <div className='flex flex-row items-center justify-between'>
                     <Link href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white linear-bg rounded-lg hover:bg-primary focus:ring-4 focus:outline-none focus:ring-blue-300">
                         Read more

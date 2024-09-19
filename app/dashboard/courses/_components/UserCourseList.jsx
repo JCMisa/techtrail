@@ -8,6 +8,7 @@ import { eq } from 'drizzle-orm'
 import React, { useState, useEffect } from 'react'
 import { toast } from 'sonner'
 import UserCourseCard from './UserCourseCard'
+import SkeletonCard from './SkeletonCard'
 
 const UserCourseList = () => {
   const { user } = useUser();
@@ -39,16 +40,27 @@ const UserCourseList = () => {
   }, [user])
 
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
+    <>
       {
-        courseList && courseList?.map((course, index) => (
-          <div key={course?.id || index}>
-            <UserCourseCard course={course} />
+        courseList?.length > 0 ? (
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
+            {
+              courseList && courseList?.map((course, index) => (
+                <div key={course?.id || index}>
+                  <UserCourseCard course={course} />
+                </div>
+              ))
+            }
+            <LoadingDialog loading={loading} />
           </div>
-        ))
+        ) : (
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
+            <SkeletonCard />
+            <SkeletonCard />
+          </div>
+        )
       }
-      <LoadingDialog loading={loading} />
-    </div>
+    </>
   )
 }
 
