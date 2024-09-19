@@ -120,6 +120,7 @@ body {
 
 .card-scroll::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 .card-scroll::-webkit-scrollbar-track {
