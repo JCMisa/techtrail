@@ -3,6 +3,7 @@ import React from 'react'
 // import YouTube from 'react-youtube'
 import CourseContent from './CourseContent';
 import YoutubeIframe from './YoutubeIFrame';
+import QuestionCard from './QuestionCard';
 
 // const opts = {
 //     height: '390',
@@ -40,6 +41,23 @@ const CourseComponent = ({ chapter }) => {
                     </div>
                 ))
             }
+
+            {/* questions */}
+            <div className='my-10'>
+                <div>
+                    <h2 className='text-lg sm:text-3xl font-bold'>Test your knowledge</h2>
+                    <p className='text-xs sm:text-sm text-gray-500'>Apply what you've learned about {chapter?.chapterName}</p>
+                    <div className='my-5 flex flex-col gap-5'>
+                        {
+                            chapter?.questions.map((question, index) => (
+                                <div key={index}>
+                                    <QuestionCard question={question} index={index} />
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
