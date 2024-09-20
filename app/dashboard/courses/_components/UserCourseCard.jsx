@@ -3,7 +3,7 @@
 import { db } from '@/utils/db'
 import { Course } from '@/utils/schema'
 import { eq } from 'drizzle-orm'
-import { Dot, EllipsisVertical } from 'lucide-react'
+import { EllipsisVertical } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'

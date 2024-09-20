@@ -23,7 +23,7 @@ const UserCourseList = () => {
         .from(Course)
         .where(eq(Course?.createdBy, user?.primaryEmailAddress?.emailAddress))
 
-      if (result) {
+      if (result.length > 0) {
         setCourseList(result);
       }
     } catch (error) {

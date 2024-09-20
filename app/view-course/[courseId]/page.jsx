@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { db } from '@/utils/db'
 import { Course } from '@/utils/schema'
 import { useUser } from '@clerk/nextjs'
-import { and, eq } from 'drizzle-orm'
+import { eq } from 'drizzle-orm'
 import { ArrowLeftCircle, LoaderCircle } from 'lucide-react'
 import React, { useState, useEffect } from 'react'
 import { toast } from 'sonner'
@@ -22,6 +22,7 @@ const ViewCourse = ({ params }) => {
     const [loading, setLoading] = useState(false);
     const [activeIndex, setactiveIndex] = useState(0);
     const [course, setCourse] = useState();
+    const [bgImage, setBgImage] = useState();
 
     const [userAnswer, setUserAnswer] = useState([]);
 
@@ -31,10 +32,7 @@ const ViewCourse = ({ params }) => {
             const result = await db.select()
                 .from(Course)
                 .where(
-                    and(
-                        eq(Course?.courseId, params?.courseId),
-                        eq(Course?.createdBy, user?.primaryEmailAddress?.emailAddress)
-                    )
+                    eq(Course?.courseId, params?.courseId)
                 )
 
             if (result) {
@@ -72,10 +70,26 @@ const ViewCourse = ({ params }) => {
 
     const completeCourse = () => { }
 
+    // generate random number to display random bg image
+    const getRandomBgImage = () => {
+        const randomNumber = Math.floor(Math.random() * 3) + 1;
+        if (randomNumber === 1) {
+            setBgImage('bg-img1')
+        } else if (randomNumber === 2) {
+            setBgImage('bg-img2')
+        } else {
+            setBgImage('bg-img3')
+        }
+    }
+
+    useEffect(() => {
+        getRandomBgImage();
+    }, [])
+
     return (
         <div>
             <UserAnswerContext.Provider value={{ userAnswer, setUserAnswer }}>
-                <div className='min-h-screen w-full overflow-x-hidden flex justify-center items-center bg-img1 bg-fixed bg-no-repeat bg-cover bg-center no-print'>
+                <div className={`min-h-screen w-full overflow-x-hidden flex justify-center items-center ${bgImage} bg-fixed bg-no-repeat bg-cover bg-center no-print`}>
                     <div className='flex flex-col gap-3 p-10 sm:p-5 w-full'>
                         <ArrowLeftCircle className='min-w-10 max-w-10 min-h-10 max-h-10 cursor-pointer' onClick={() => router.replace('/dashboard/courses')} />
                         <h2 className='text-2xl sm:text-6xl font-black linear-text'>{course?.courseOutput?.course?.name}</h2>
