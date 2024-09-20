@@ -44,7 +44,7 @@ const SideNav = ({ isShow }) => {
     return (
         <div>
             {isShow && (
-                <div className="h-screen p-5 border shadow-md transition-all relative">
+                <div className="h-screen p-5 border shadow-lg transition-all relative">
                     <Link href={"/"}>
                         <div className="flex items-center gap-2 cursor-pointer">
                             <Image src={"/techtrail-logo.png"} alt="logo" width={50} height={50} />

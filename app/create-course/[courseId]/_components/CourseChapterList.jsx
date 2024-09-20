@@ -10,8 +10,8 @@ const CourseChapterList = ({ course, refreshData, edit = true }) => {
             <div className='mt-2 flex flex-col gap-2'>
                 {
                     course?.courseOutput?.course?.chapters?.map((chapter, index) => (
-                        <div className='border p-5 rounded-lg shadow-md bg-dark-100 flex items-center justify-between gap-5'>
-                            <div key={index} className='flex gap-5 items-center'>
+                        <div key={index} className='border p-5 rounded-lg shadow-md bg-dark-100 flex items-center justify-between gap-5'>
+                            <div className='flex gap-5 items-center'>
                                 <h2 className='bg-primary flex-none h-10 w-10 text-white rounded-full text-center items-center justify-center p-2'>
                                     {index + 1}
                                 </h2>
