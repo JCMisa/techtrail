@@ -16,7 +16,6 @@ import {
 import { LoaderCircle, SquarePen } from 'lucide-react';
 import { toast } from 'sonner';
 import { chatSession } from '@/utils/AiModel';
-import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
 
 const QuestionCard = ({ question, index }) => {
@@ -113,7 +112,7 @@ const QuestionCard = ({ question, index }) => {
                                         <p className='font-bold text-sm text-white'>Your Answer is Incorrect 😟 Please Try Again!</p>
                                         <div className='flex flex-col gap-1'>
                                             <p className='font-bold text-lg'>Explanation</p>
-                                            <ReactMarkdown className='bg-dark-200 p-3 rounded-lg'>{explanation}</ReactMarkdown>
+                                            <div className='bg-dark-200 p-3 rounded-lg'><p className='text-white'>{explanation}</p></div>
                                         </div>
                                     </div>
                                 )}

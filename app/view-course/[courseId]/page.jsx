@@ -13,6 +13,7 @@ import { toast } from 'sonner'
 import CourseComponent from './_components/CourseComponent'
 import { useRouter } from 'next/navigation'
 import { UserAnswerContext } from '@/app/_context/UserAnswerContext'
+import CourseCompletePage from './_components/CourseCompletePage'
 
 const ViewCourse = ({ params }) => {
     const { user } = useUser();
@@ -71,10 +72,6 @@ const ViewCourse = ({ params }) => {
 
     const completeCourse = () => { }
 
-    useEffect(() => {
-        console.log('courseInput Context: ', userAnswer)
-    }, [userAnswer])
-
     return (
         <div>
             <UserAnswerContext.Provider value={{ userAnswer, setUserAnswer }}>
@@ -121,6 +118,11 @@ const ViewCourse = ({ params }) => {
                                         </div>
                                     )
                                 ))
+                            }
+                            {
+                                activeIndex >= course?.courseOutput?.course?.chapters?.length && (
+                                    <CourseCompletePage course={course} user={user} />
+                                )
                             }
 
                             {/* next & prev btns */}
