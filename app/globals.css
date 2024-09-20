@@ -131,6 +131,30 @@ body {
   background: -webkit-linear-gradient(16deg, #0ec4e8, #9e30a9);
 }
 
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  #print-area {
+    display: block;
+    margin-top: -3rem;
+  }
+
+  /* this will fit the printed certificate */
+  body {
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
+/* this will fit the printed certificate */
+@page {
+  size: auto;
+  margin: 0mm;
+}
+
 /* sign in page */
 .submit-in {
   color: #9fc4d0;

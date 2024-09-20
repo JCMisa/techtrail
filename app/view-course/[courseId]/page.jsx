@@ -75,7 +75,7 @@ const ViewCourse = ({ params }) => {
     return (
         <div>
             <UserAnswerContext.Provider value={{ userAnswer, setUserAnswer }}>
-                <div className='min-h-screen w-full overflow-x-hidden flex justify-center items-center bg-img1 bg-fixed bg-no-repeat bg-cover bg-center'>
+                <div className='min-h-screen w-full overflow-x-hidden flex justify-center items-center bg-img1 bg-fixed bg-no-repeat bg-cover bg-center no-print'>
                     <div className='flex flex-col gap-3 p-10 sm:p-5 w-full'>
                         <ArrowLeftCircle className='min-w-10 max-w-10 min-h-10 max-h-10 cursor-pointer' onClick={() => router.replace('/dashboard/courses')} />
                         <h2 className='text-2xl sm:text-6xl font-black linear-text'>{course?.courseOutput?.course?.name}</h2>
@@ -88,7 +88,7 @@ const ViewCourse = ({ params }) => {
 
                     <div>
                         {/* stepper */}
-                        <div className='flex flex-col items-center justify-center mt-10 overflow-x-auto card-scroll'>
+                        <div className='flex flex-col items-center justify-center mt-10 overflow-x-auto card-scroll no-print'>
                             <div className='flex mt-10 mb-7'>
                                 {
                                     course?.courseOutput?.course?.chapters?.map((item, index) => (
@@ -126,7 +126,7 @@ const ViewCourse = ({ params }) => {
                             }
 
                             {/* next & prev btns */}
-                            <div className='flex flex-col gap-3 sm:flex-row justify-between mt-10 items-center overflow-auto card-scroll'>
+                            <div className='flex flex-col gap-3 sm:flex-row justify-between mt-10 items-center overflow-auto card-scroll no-print'>
                                 <Button onClick={() => setactiveIndex(activeIndex - 1)} disabled={activeIndex === 0} className='min-w-52 border-primary hover:bg-primary hover:text-white' variant={'outline'}>
                                     Previous
                                 </Button>

@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export default function Certificate({ user, course }) {
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4 relative">
+        <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
             <div className="w-full max-w-4xl bg-white shadow-2xl rounded-lg overflow-hidden">
                 <div className="p-8 sm:p-12 border-8 border-double border-gray-200 m-4 sm:m-8 space-y-6 text-center">
                     <h1 className="text-3xl sm:text-5xl font-bold text-gray-800 mb-4">Certificate of Achievement</h1>
@@ -21,9 +21,6 @@ export default function Certificate({ user, course }) {
                             <Image src={'/signature.png'} width={1000} height={1000} alt="signature" />
                         </div>
                         <p className="pt-2 text-gray-600">Issuer Signature</p>
-                    </div>
-                    <div className="absolute top-0 right-4 w-24 h-24">
-                        <img src="/techtrail-logo.png" alt="Certificate Seal" className="w-full h-full object-contain" />
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@ import React from 'react'
 
 const CourseDetails = ({ course, showTitle = true }) => {
     return (
-        <div className='mt-3'>
+        <div className='mt-3 no-print'>
             {showTitle && <h2 className='font-bold text-xl'>Details</h2>}
             <div className='md:flex md:flex-col grid grid-cols-3 gap-3 mt-2'>
                 <div className='flex justify-center items-center gap-2 bg-dark-100 rounded-lg p-3 overflow-x-hidden card-scroll'>
