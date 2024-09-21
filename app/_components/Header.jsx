@@ -11,7 +11,7 @@ const Header = () => {
     const router = useRouter();
 
     return (
-        <div className='flex justify-between items-center p-5 shadow-lg'>
+        <div className='flex justify-between items-center p-5 shadow-lg overflow-hidden'>
             <div className='flex flex-row items-center cursor-pointer' onClick={() => router.replace('/')}>
                 <Image src={'/techtrail-logo.png'} width={50} height={50} alt='logo' />
                 <h2 className='logo-text text-lg -ml-2'>TechTrail</h2>

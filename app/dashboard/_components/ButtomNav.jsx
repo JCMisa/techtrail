@@ -33,7 +33,7 @@ const ButtomNav = () => {
             id: 5,
             name: "Settings",
             icon: <Settings />,
-            path: "/dashboard/setting",
+            path: "/setting",
         },
     ];
 

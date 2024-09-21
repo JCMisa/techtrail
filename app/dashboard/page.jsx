@@ -7,6 +7,7 @@ import { useUser } from '@clerk/nextjs'
 const DashboardPage = () => {
     const { user } = useUser();
 
+    // todo: fix the dashboard interface
     return (
         <div className='p-5'>
             <div className='flex flex-row items-center justify-between'>
