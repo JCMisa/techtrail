@@ -2,7 +2,7 @@
 
 import { UserAnswerContext } from '@/app/_context/UserAnswerContext';
 import { Button } from '@/components/ui/button'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
     Dialog,
     DialogClose,
@@ -17,8 +17,15 @@ import { LoaderCircle, SquarePen } from 'lucide-react';
 import { toast } from 'sonner';
 import { chatSession } from '@/utils/AiModel';
 import Image from 'next/image';
+import { db } from '@/utils/db';
+import { Player } from '@/utils/schema';
+import { point } from 'drizzle-orm/pg-core';
+import { useUser } from '@clerk/nextjs';
+import { eq } from 'drizzle-orm';
 
 const QuestionCard = ({ question, index }) => {
+    const { user } = useUser();
+
     const [isSelected, setIsSelected] = useState(false);
     const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
     const [isCorrect, setIsCorrect] = useState(false);
@@ -28,6 +35,7 @@ const QuestionCard = ({ question, index }) => {
 
     const { userAnswer, setUserAnswer } = useContext(UserAnswerContext);
 
+    // mark the option button as selected by changing its appearance and updating the userAnswer context's answer property value
     const markAsSelected = (option, index) => {
         setUserAnswer(prev => ({
             ...prev,
@@ -41,13 +49,39 @@ const QuestionCard = ({ question, index }) => {
         }
     }
 
-    //TODO: add logged in user in player table in database and update their points based on the answer result
+    // check if the selected answer is equal to the question's correct answer
     const checkAnswer = async () => {
         setDisabled(true);
         if (userAnswer?.answer == question?.answer) {
             setIsCorrect(true);
+            // if answer is correct, increment the player points
+            setLoading(true);
+            try {
+                // first, get the player's current points
+                const data = await db.select().from(Player)
+                    .where(eq(Player?.email, user?.primaryEmailAddress?.emailAddress))
+
+                if (data.length > 0) {
+                    // then increment the player's points to 1 if the player is found
+                    const result = await db.update(Player).set({
+                        points: data[0]?.points + 1
+                    }).where(eq(Player?.email, user?.primaryEmailAddress?.emailAddress))
+                    if (result) {
+                        toast(
+                            <p className='text-sm font-bold text-green-500'>Correct Answer! You have earned 1 point</p>
+                        )
+                    }
+                }
+            } catch (error) {
+                toast(
+                    <p className='font-bold text-sm text-red-500'>Internal error occured while updating points</p>
+                )
+            } finally {
+                setLoading(false);
+            }
         } else {
             setIsCorrect(false);
+            // if answer is wrong, generate an explanation with AI and display it in the dialog
             setLoading(true);
             try {
                 const PROMPT = `Please generate a complete explanation in string format on why ${userAnswer?.answer} is not the correct answer for the question: ${question?.question}, and why ${question?.answer} is the right one.`;
@@ -57,7 +91,7 @@ const QuestionCard = ({ question, index }) => {
                 }
             } catch (error) {
                 toast(
-                    <p>Internal error occured while requesting explanations</p>
+                    <p className='font-bold text-sm text-red-500'>Internal error occured while requesting explanations</p>
                 )
             } finally {
                 setLoading(false);
