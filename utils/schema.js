@@ -1,4 +1,5 @@
 import {
+    boolean,
     integer,
     json,
     pgTable,
@@ -28,4 +29,13 @@ export const Player = pgTable("player", {
     createdAt: varchar("createdAt"),
     points: integer("points"),
     username: varchar("username")
+});
+
+export const UserSubscription = pgTable("userSubscription", {
+    id: serial("id").primaryKey(),
+    email: varchar("email"),
+    username: varchar("username"),
+    active: boolean("active"),
+    paymentId: varchar("paymentId"),
+    joinDate: varchar("joinDate"),
 });

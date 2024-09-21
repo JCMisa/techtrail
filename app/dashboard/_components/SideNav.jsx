@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { BookOpen, LayoutGrid, Settings, Telescope, WalletCards } from "lucide-react";
+import UsageTrack from "./UsageTrack";
 
 const SideNav = ({ isShow }) => {
 
@@ -68,9 +69,9 @@ const SideNav = ({ isShow }) => {
                             </Link>
                         ))}
                     </div>
-                    {/* <div className="absolute bottom-10 left-3 w-[80%]">
+                    <div className="absolute bottom-0 left-3 w-[80%]">
                         <UsageTrack />
-                    </div> */}
+                    </div>
                 </div>
             )}
         </div>
