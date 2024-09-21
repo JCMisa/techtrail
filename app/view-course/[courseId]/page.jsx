@@ -53,22 +53,15 @@ const ViewCourse = ({ params }) => {
 
     // check if context array is empty, then disable te next button
     const checkStatus = () => {
-        // if (userCourseInput?.length == 0) {
-        //     return true;
-        // }
-        // if (activeIndex == 0 && (userCourseInput?.category?.length == 0 || userCourseInput?.category == undefined)) {
-        //     return true;
-        // }
-        // if (activeIndex == 1 && (userCourseInput?.topic?.length == 0 || userCourseInput?.topic == undefined)) {
-        //     return true;
-        // }
-        // if (activeIndex == 2 && (userCourseInput?.level == undefined || userCourseInput?.duration == undefined || userCourseInput?.displayVideo == undefined || userCourseInput?.chapters == undefined)) {
-        //     return true;
-        // }
-        // return false;
+        if (userAnswer?.length == 0) {
+            return true;
+        }
+        return false;
     }
 
-    const completeCourse = () => { }
+    const completeCourse = () => {
+        router.replace('/dashboard/courses');
+    }
 
     // generate random number to display random bg image
     const getRandomBgImage = () => {

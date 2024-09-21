@@ -5,14 +5,6 @@ import CourseContent from './CourseContent';
 import YoutubeIframe from './YoutubeIFrame';
 import QuestionCard from './QuestionCard';
 
-// const opts = {
-//     height: '390',
-//     playerVars: {
-//         // https://developers.google.com/youtube/player_parameters
-//         autoplay: 0,
-//     },
-// };
-
 const CourseComponent = ({ chapter }) => {
     return (
         <div className='flex flex-col gap-2'>
@@ -25,11 +17,6 @@ const CourseComponent = ({ chapter }) => {
 
             {/* video */}
             <div className='flex justify-center my-6 bg-red-500'>
-                {/* <YouTube
-                    videoId={chapter?.chapterVideo}
-                    opts={opts}
-                    className='w-20 sm:w-auto'
-                /> */}
                 <YoutubeIframe videoId={chapter?.chapterVideo} videoTitle={chapter?.chapterName} />
             </div>
 

@@ -29,13 +29,16 @@ const QuestionCard = ({ question, index }) => {
     const { userAnswer, setUserAnswer } = useContext(UserAnswerContext);
 
     const markAsSelected = (option, index) => {
-        setIsSelected(prev => !prev);
-        setSelectedOptionIndex(index);
-
         setUserAnswer(prev => ({
             ...prev,
             answer: option
         }))
+
+        if (userAnswer?.answer != undefined) {
+            console.log('answer context: ', userAnswer)
+            setIsSelected(prev => !prev);
+            setSelectedOptionIndex(index);
+        }
     }
 
     //TODO: add logged in user in player table in database and update their points based on the answer result
@@ -72,9 +75,7 @@ const QuestionCard = ({ question, index }) => {
                 <div className='mt-3 flex flex-col gap-3'>
                     {
                         question?.options?.map((option, index) => (
-                            <Button key={index} variant='outline' className={`${(isSelected && index === selectedOptionIndex) && 'bg-primary border-primary'}`} onClick={() => {
-                                markAsSelected(option, index);
-                            }}>
+                            <Button key={index} variant='outline' className={`${(isSelected && index === selectedOptionIndex) && 'bg-primary border-primary'}`} onClick={() => markAsSelected(option, index)}>
                                 {option}
                             </Button>
                         ))
