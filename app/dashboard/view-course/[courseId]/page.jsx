@@ -80,7 +80,7 @@ const ViewCourse = ({ params }) => {
     }, [])
 
     return (
-        <div>
+        <div className='mb-20 md:mb-0'>
             <UserAnswerContext.Provider value={{ userAnswer, setUserAnswer }}>
                 <div className={`min-h-screen w-full overflow-x-hidden flex justify-center items-center ${bgImage} bg-fixed bg-no-repeat bg-cover bg-center no-print`}>
                     <div className='flex flex-col gap-3 p-10 sm:p-5 w-full'>
@@ -115,7 +115,7 @@ const ViewCourse = ({ params }) => {
                             </div>
                         </div>
 
-                        <div className='px-10 md:px-20 lg:px-44 mt-10'>
+                        <div className=' mt-10'>
                             {/* components */}
                             {
                                 course?.courseOutput?.course?.chapters?.map((chapter, index) => (
@@ -134,18 +134,18 @@ const ViewCourse = ({ params }) => {
 
                             {/* next & prev btns */}
                             <div className='flex flex-col gap-3 sm:flex-row justify-between mt-10 items-center overflow-auto card-scroll no-print'>
-                                <Button onClick={() => setactiveIndex(activeIndex - 1)} disabled={activeIndex === 0} className='min-w-52 border-primary hover:bg-primary hover:text-white' variant={'outline'}>
+                                <Button onClick={() => setactiveIndex(activeIndex - 1)} disabled={activeIndex === 0} className='min-w-32 border-primary hover:bg-primary hover:text-white' variant={'outline'}>
                                     Previous
                                 </Button>
                                 {
                                     activeIndex < course?.courseOutput?.course?.chapters?.length &&
-                                    <Button onClick={() => setactiveIndex(activeIndex + 1)} className='min-w-52' disabled={checkStatus()}>
+                                    <Button onClick={() => setactiveIndex(activeIndex + 1)} className='min-w-32' disabled={checkStatus()}>
                                         Next
                                     </Button>
                                 }
                                 {
                                     activeIndex === course?.courseOutput?.course?.chapters?.length &&
-                                    <Button onClick={() => completeCourse()} className='min-w-52' disabled={checkStatus()}>
+                                    <Button onClick={() => completeCourse()} className='min-w-32' disabled={checkStatus()}>
                                         {loading ? <LoaderCircle className='animate-spin' /> : 'Complete Course'}
                                     </Button>
                                 }

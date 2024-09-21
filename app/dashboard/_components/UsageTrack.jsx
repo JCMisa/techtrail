@@ -70,7 +70,7 @@ const UsageTrack = () => {
                     <Button
                         variant={"outline"}
                         size={"sm"}
-                        className="text-primary-100 border-primary-100 hover:bg-dark-100 hover:text-primary-100"
+                        className="text-primary border-primary hover:bg-dark-100 hover:text-primary"
                         onClick={() => getTotalUsage()}
                     >
                         Refresh

@@ -19,9 +19,9 @@ import { chatSession } from '@/utils/AiModel';
 import Image from 'next/image';
 import { db } from '@/utils/db';
 import { Player } from '@/utils/schema';
-import { point } from 'drizzle-orm/pg-core';
 import { useUser } from '@clerk/nextjs';
 import { eq } from 'drizzle-orm';
+import { UserSubscriptionContext } from '@/app/_context/UserSubscriptionContext';
 
 const QuestionCard = ({ question, index }) => {
     const { user } = useUser();
@@ -34,6 +34,7 @@ const QuestionCard = ({ question, index }) => {
     const [disabled, setDisabled] = useState(false);
 
     const { userAnswer, setUserAnswer } = useContext(UserAnswerContext);
+    const { userSubscription, setUserSubscription } = useContext(UserSubscriptionContext);
 
     // mark the option button as selected by changing its appearance and updating the userAnswer context's answer property value
     const markAsSelected = (option, index) => {
@@ -54,30 +55,34 @@ const QuestionCard = ({ question, index }) => {
         setDisabled(true);
         if (userAnswer?.answer == question?.answer) {
             setIsCorrect(true);
-            // if answer is correct, increment the player points
-            setLoading(true);
-            try {
-                // first, get the player's current points
-                const data = await db.select().from(Player)
-                    .where(eq(Player?.email, user?.primaryEmailAddress?.emailAddress))
+            // if answer is correct AND if user is subscribed, increment the player points
+            if (userSubscription) {
+                setLoading(true);
+                try {
+                    // first, get the player's current points
+                    const data = await db.select().from(Player)
+                        .where(eq(Player?.email, user?.primaryEmailAddress?.emailAddress))
 
-                if (data.length > 0) {
-                    // then increment the player's points to 1 if the player is found
-                    const result = await db.update(Player).set({
-                        points: data[0]?.points + 1
-                    }).where(eq(Player?.email, user?.primaryEmailAddress?.emailAddress))
-                    if (result) {
-                        toast(
-                            <p className='text-sm font-bold text-green-500'>Correct Answer! You have earned 1 point</p>
-                        )
+                    if (data.length > 0) {
+                        // then increment the player's points to 1 if the player is found
+                        const result = await db.update(Player).set({
+                            points: data[0]?.points + 1
+                        }).where(eq(Player?.email, user?.primaryEmailAddress?.emailAddress))
+                        if (result) {
+                            toast(
+                                <p className='text-sm font-bold text-green-500'>Correct Answer! You have earned 1 point</p>
+                            )
+                        }
                     }
+                } catch (error) {
+                    toast(
+                        <p className='font-bold text-sm text-red-500'>Internal error occured while updating points</p>
+                    )
+                } finally {
+                    setLoading(false);
                 }
-            } catch (error) {
-                toast(
-                    <p className='font-bold text-sm text-red-500'>Internal error occured while updating points</p>
-                )
-            } finally {
-                setLoading(false);
+            } else {
+                return;
             }
         } else {
             setIsCorrect(false);
@@ -109,7 +114,7 @@ const QuestionCard = ({ question, index }) => {
                 <div className='mt-3 flex flex-col gap-3'>
                     {
                         question?.options?.map((option, index) => (
-                            <Button key={index} variant='outline' className={`${(isSelected && index === selectedOptionIndex) && 'bg-primary border-primary'}`} onClick={() => markAsSelected(option, index)}>
+                            <Button key={index} variant='outline' className={`${(isSelected && index === selectedOptionIndex) && 'bg-primary border-primary'} overflow-auto card-scroll`} onClick={() => markAsSelected(option, index)}>
                                 {option}
                             </Button>
                         ))

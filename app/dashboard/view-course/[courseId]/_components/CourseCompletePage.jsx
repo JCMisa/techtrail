@@ -1,4 +1,3 @@
-import { useUser } from '@clerk/nextjs'
 import React from 'react'
 import Certificate from './Certificate'
 import { Button } from '@/components/ui/button'
