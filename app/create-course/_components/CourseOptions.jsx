@@ -64,7 +64,7 @@ const CourseOptions = () => {
                         <Hash className='w-5 h-5' />
                         <label className='text-sm my-2'>No. of Chapters</label>
                     </div>
-                    <Input type={'number'} onChange={(e) => handleInputChange('chapters', e.target.value)} defaultValue={userCourseInput?.chapters} />
+                    <Input type={'number'} min="1" max="5" onChange={(e) => handleInputChange('chapters', (e.target.value < 1 || e.target.value > 5) ? '3' : e.target.value)} defaultValue={userCourseInput?.chapters} />
                 </div>
             </div>
         </div>

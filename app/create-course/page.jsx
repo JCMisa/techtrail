@@ -39,7 +39,7 @@ const CreateCoursePage = () => {
         try {
             const aiResponse = await chatSession.sendMessage(PROMPT);
             if (aiResponse) {
-                saveToDb(JSON.parse(aiResponse?.response?.text()));
+                await saveToDb(JSON.parse(aiResponse?.response?.text()));
             }
         } catch (error) {
             toast(
