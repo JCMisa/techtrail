@@ -48,7 +48,7 @@ const DashboardHeader = ({ showSideNav }) => {
     };
 
     return (
-        <div className="p-5 shadow-md border-b flex justify-between items-center">
+        <div className="p-5 shadow-md border-b flex justify-between items-center no-print">
             <div className="md:flex flex-row gap-5 items-center hidden">
                 <div className="cursor-pointer">
                     <AlignJustify onClick={showSideNav} />

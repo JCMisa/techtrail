@@ -144,7 +144,7 @@ const QuestionCard = ({ question, index }) => {
                                     <div className='flex flex-col gap-3'>
                                         <p className='font-bold text-sm text-white'>Congratulations! Your Answer is Correct 🎉 <span className='text-green-500'>+1 points</span></p>
                                         <div>
-                                            <Image src={'/correct.gif'} width={1000} height={1000} alt='correct' />
+                                            <Image src={'/success.gif'} width={1000} height={1000} alt='correct' />
                                         </div>
                                     </div>
                                 ) : (

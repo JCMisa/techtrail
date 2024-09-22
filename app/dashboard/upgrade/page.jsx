@@ -64,7 +64,6 @@ const UpgradePage = () => {
                                 <PlanFeaturesCard feature={'5 Courses Limit'} />
                                 <PlanFeaturesCard feature={'AI Generated Content'} />
                                 <PlanFeaturesCard feature={'AI Generated Questions'} />
-                                <PlanFeaturesCard feature={'Course Completion Certificate'} />
                                 <button
                                     className="flex items-center mt-auto text-white bg-gray-800 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-700 rounded"
                                     onClick={() => router.push("/dashboard")}
@@ -103,7 +102,6 @@ const UpgradePage = () => {
                                 <PlanFeaturesCard feature={'AI Generated Questions'} />
                                 <PlanFeaturesCard feature={'Course Completion Certificate'} />
                                 <PlanFeaturesCard feature={'Points Activation'} />
-                                <PlanFeaturesCard feature={'Premium Certificate'} />
                                 <Dialog>
                                     <DialogTrigger asChild className="flex">
                                         <button

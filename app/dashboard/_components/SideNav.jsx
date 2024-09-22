@@ -43,7 +43,7 @@ const SideNav = ({ isShow }) => {
     const path = usePathname();
 
     return (
-        <div>
+        <div className="no-print">
             {isShow && (
                 <div className="h-screen p-5 border shadow-lg transition-all relative">
                     <Link href={"/"}>
